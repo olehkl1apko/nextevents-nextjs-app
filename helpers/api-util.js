@@ -30,6 +30,7 @@ export async function getFilteredEvents(dateFilter) {
   const { year, month } = dateFilter;
 
   const allEvents = await getAllEvents();
+
   let filteredEvents = allEvents.filter((event) => {
     const eventDate = new Date(event.date);
     return (
