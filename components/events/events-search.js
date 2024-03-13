@@ -7,17 +7,17 @@ function EventsSearch({ onSearch }) {
   const yearInputRef = useRef();
   const monthInputRef = useRef();
 
-  function submitHandler(event) {
-    event.preventDefault();
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
 
     const selectedYear = yearInputRef.current.value;
     const selectedMonth = monthInputRef.current.value;
 
     onSearch(selectedYear, selectedMonth);
-  }
+  };
 
   return (
-    <form className={classes.form} onSubmit={submitHandler}>
+    <form className={classes.form} onSubmit={handleSubmit}>
       <div className={classes.controls}>
         <div className={classes.control}>
           <label htmlFor="year">Year</label>
