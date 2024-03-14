@@ -1,13 +1,32 @@
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import Head from "next/head";
+import useSWR from "swr";
 
-import { getFilteredEvents } from "../../helpers/api-util";
+import { getFilteredEvents, EVENT_URL } from "../../helpers/api-util";
 import EventList from "../../components/events/event-list";
 import ResultsTitle from "../../components/events/results-title";
 import Button from "../../components/ui/button";
 import ErrorAlert from "../../components/ui/error-alert";
 
 function FilteredEventsPage(props) {
+  // const [loadedEvents, setLoadedEvents] = useState();
+  // const { data, error } = useSWR(props.EVENT_URL);
+
+  // useEffect(() => {
+  //   if (data) 
+  //     const events = [];
+
+  //     for (const key in data) {
+  //       events.push({
+  //         id: key,
+  //         ...data[key],
+  //       });
+  //     }
+
+  //     setLoadedEvents(events);
+  //   }
+  // }, [data]);
+
   const filteredEvents = props.events;
   const date = new Date(props.date.year, props.date.month - 1);
 
@@ -98,6 +117,7 @@ export async function getServerSideProps(context) {
         year: numYear,
         month: numMonth,
       },
+      EVENT_URL,
     },
   };
 }
