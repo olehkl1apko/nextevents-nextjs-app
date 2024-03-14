@@ -6,9 +6,10 @@ import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
 import ErrorAlert from "../../components/ui/error-alert";
+import Comments from "../../components/input/comments";
 
 function EventDetailPage(props) {
-  const { event } = props;
+  const event = props.selectedEvent;
 
   if (!event) {
     return (
@@ -34,6 +35,7 @@ function EventDetailPage(props) {
       <EventContent>
         <p>{event.description}</p>
       </EventContent>
+      <Comments eventId={event.id} />
     </Fragment>
   );
 }
@@ -45,7 +47,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      event,
+      selectedEvent: event,
     },
     revalidate: 30,
   };
@@ -57,7 +59,7 @@ export async function getStaticPaths() {
   const paths = events.map((event) => ({ params: { eventId: event.id } }));
 
   return {
-    paths,
+    paths: paths,
     fallback: "blocking",
   };
 }
